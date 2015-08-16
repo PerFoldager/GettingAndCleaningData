@@ -43,7 +43,7 @@ Training data: DataType, Subject_ID (subject_train), AvtivityType (Modified y_tr
 ## Produce tidy output file
 Combines rows from test and training into a combined training data frame consisting of columns of subjects, activity labels and train data.
 
-Creates a subset of all data with DataType, Subject_ID, ActivityType and all columns having experessions ".mean." and ".std."
+Creates a subset of all data with DataType, Subject_ID, ActivityType and all columns having expressions ".mean." and ".std."
 
 Writes tidy data to file "UCIHAR_allData_Subset_Tidy_Table.txt" in folder "data"" under Working Directory.
 

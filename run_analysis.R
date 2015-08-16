@@ -142,7 +142,7 @@ run_analysis <- function() {
   ## Step 7 Produce the tidy dataset, that only provides average values of each variable for each activity and subject 
   message("Step 7 - Producing the tidy dataset, that only provides average values of each variable for each activity and subject.")
   
-  # Create a subset of all data with DataType, Subject_ID, ActivityType and all columns having experessions ".mean." and ".std."
+  # Create a subset of all data with DataType, Subject_ID, ActivityType and all columns having expressions ".mean." and ".std."
   df_UCIHAR_allData_Subset <- select(df_UCIHAR_allData, DataType, Subject_ID, ActivityType, contains(".mean."), contains(".std.") )
 
   # Create the required tidy data set with the average of each variable for each activity and each subject.
