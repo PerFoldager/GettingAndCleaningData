@@ -1,6 +1,7 @@
 # Getting And Cleaning Data
 Course project in Coursera Getting and Cleaning Data
 The purpose of the project is to make a tidy dataset out of the Human Activity Recognition data generated from smartphones. The data is split inyto two sets:
+
 1. Training Data (70% of the volunteers)
 2. Test data (30% of the volunteers)
 
@@ -11,10 +12,12 @@ You activate the script by executing the command *run_analysis()*.
 ## Download data
 This is handled by function *downloadUCIHARData*
 Data is downloaded as a zip file from https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
-The URL is hardoded in the function.
+
+The URL is hard coded in the function.
 
 ## Unzip files
-This is handled by function *extractUCIHARFiles*
+This is handled by function *extractUCIHARFiles
+
 Data is unzipped to folder in working directory. The folder is the foldername in the path for each file in the zip file.
 
 ## Read datasets into data.frames
@@ -22,6 +25,7 @@ The list of files in the zip is checked in order to find path to the required fi
 Each required file is read into a data.frame by calling the function *readUCIHARdatafile*
 
 The following files are required
+
 1. UCI HAR Dataset/activity_labels.txt
 2. UCI HAR Dataset/features.txt
 3. UCI HAR Dataset/test/subject_test.txt
@@ -37,8 +41,20 @@ The data frames is given correct column names. The features.txt contains the lab
 
 ## Create combined test data frame consisting of columns of subjects, activity labels and test data
 A new data.frame indicating whether it is test or training data is created for each type.
-Test data: DataType, Subject_ID (subject_test), AvtivityType (Modified y_test) and UCI HAR data (X_train)
-Training data: DataType, Subject_ID (subject_train), AvtivityType (Modified y_train) and UCI HAR data (X_train)
+
+Test data:
+
+* DataType
+* Subject_ID (subject_test)
+* AvtivityType (Modified y_test)
+* UCI HAR data (X_train)
+
+Training data: 
+
+* DataType
+* Subject_ID (subject_train)
+* AvtivityType (Modified y_train)
+* UCI HAR data (X_train)
 
 ## Produce tidy output file
 Combines rows from test and training into a combined training data frame consisting of columns of subjects, activity labels and train data.

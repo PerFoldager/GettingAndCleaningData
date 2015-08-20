@@ -142,20 +142,28 @@ run_analysis <- function() {
   ## Step 7 Produce the tidy dataset, that only provides average values of each variable for each activity and subject 
   message("Step 7 - Producing the tidy dataset, that only provides average values of each variable for each activity and subject.")
   
-  # Create a subset of all data with DataType, Subject_ID, ActivityType and all columns having expressions ".mean." and ".std."
+  ## Create a subset of all data with DataType, Subject_ID, ActivityType and all columns having expressions ".mean." and ".std."
   df_UCIHAR_allData_Subset <- select(df_UCIHAR_allData, DataType, Subject_ID, ActivityType, contains(".mean."), contains(".std.") )
 
-  # Create the required tidy data set with the average of each variable for each activity and each subject.
-  df_UCIHAR_allData_SubsetTidy <- group_by(df_UCIHAR_allData_Subset, Subject_ID, ActivityType) %>%
+  ## Create the required tidy data set with the average of each variable for each activity and each subject.
+  df_UCIHAR_allData_SubsetTidy <- group_by(df_UCIHAR_allData_Subset, Subject_ID, ActivityType, DataType) %>%
     summarise_each(funs(mean))
   
+  ## Make the column names nice to read 
   output_colnames <- as.data.frame(colnames(df_UCIHAR_allData_SubsetTidy))
-  names(output_colnames) <- c("Output.Column.Names")
+  output_colnames <- as.data.frame(gsub("\\.","",as.character(output_colnames[,1])))
+  output_colnames <- as.data.frame(gsub("mean","Mean",as.character(output_colnames[,1])))
+  output_colnames <- as.data.frame(gsub("std","Std",as.character(output_colnames[,1])))
+  names(df_UCIHAR_allData_SubsetTidy) <- output_colnames[,1]
+  names(output_colnames) <- c("OutputColumnNames")
+  browser()
+  ## Output the column names to file so they can be used in code book
   write.table(output_colnames, file = "data/output_colnames.txt", row.names = F, sep  = "\t")  
-  
+
   # Store the df_UCIHAR_allData_SubsetTidy tidy data in a text file with the same name in the data folder under working dir
   write.table(df_UCIHAR_allData_SubsetTidy, file = "data/UCIHAR_allData_Subset_Tidy_Table.txt", row.names = F, sep  = "\t")  
   message("Output file: data/UCIHAR_allData_Subset_Tidy_Table.txt")
+  message("Number of columns in UCIHAR_allData_Subset_Tidy_Table.txt: ", ncol(df_UCIHAR_allData_SubsetTidy))
   
   ## browser()
   return(returncode)
